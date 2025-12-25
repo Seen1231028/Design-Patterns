@@ -6,6 +6,7 @@ interface IoT {
   shutdown(): void;
 }
 
+//Concrete Product
 class SmartLight implements IoT {
   connect() {
     console.log("SmartLight connected");
@@ -116,6 +117,7 @@ class Drones implements IoT {
   }
 }
 
+//Factory Method
 abstract class DeviceFactory {
   abstract createDevice(): IoT;
 
