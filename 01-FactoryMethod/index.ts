@@ -1,3 +1,4 @@
+//Product
 interface IoT {
   connect(): void;
   initialize(): void;
