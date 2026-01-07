@@ -1,3 +1,4 @@
+//Product
 class Planet {
   private core: string;
   private mantle: string;
@@ -77,14 +78,15 @@ class Planet {
     console.log("Continental Crust:", this.continentalCrust);
     console.log("Oceanic Crust:", this.oceanicCrust);
 
-    if (this.metallicHydrogen) console.log("Metallic Hydrogen: YES");
-    if (this.liquidHydrogen) console.log("Liquid Hydrogen: YES");
-    if (this.gaseousHydrogen) console.log("Gaseous Hydrogen: YES");
+    if (this.metallicHydrogen) console.log("Metallic Hydrogen");
+    if (this.liquidHydrogen) console.log("Liquid Hydrogen");
+    if (this.gaseousHydrogen) console.log("Gaseous Hydrogen");
 
     console.log("---------------------------\n");
   }
 }
 
+//Builder Interface
 interface Builder {
   reset(): void;
   buildCore(): void;
@@ -100,6 +102,7 @@ interface Builder {
   buildClouds(): void;
 }
 
+//Concrete Builder - Earth
 class EarthBuilder implements Builder {
   private planet!: Planet;
 
@@ -152,6 +155,7 @@ class EarthBuilder implements Builder {
   }
 }
 
+//Concrete Builder - Jupiter
 class JupiterBuilder implements Builder {
   private planet!: Planet;
 
@@ -195,6 +199,7 @@ class JupiterBuilder implements Builder {
   }
 }
 
+//Director
 class Director {
 
   makeEarth(builder: Builder) {
@@ -220,10 +225,9 @@ class Director {
 }
 
 const earth = new EarthBuilder();
-let device = new Director();
+const device = new Director();
 device.makeEarth(earth);
 earth.getResult().show();
-
 const jupiter = new JupiterBuilder();
 device.makeJupiter(jupiter);
 jupiter.getResult().show();

@@ -1,3 +1,4 @@
+//Abstract Product
 interface Engine {
   start(): void;
 }
@@ -10,6 +11,7 @@ interface Navigation {
   navigation(): void;
 }
 
+//Concrete Product -- Engine
 class ChemicalEngine implements Engine {
   start(): void {
     console.log("ChemicalEngine Start!!");
@@ -28,6 +30,7 @@ class IonEngine implements Engine {
   }
 }
 
+//Concrete Product -- LifeSupport
 class BasicLifeSupport implements LifeSupport {
   activate(): void {
     console.log("BasicLifeSupport activate!!");
@@ -46,6 +49,7 @@ class SelfRepairLifeSupport implements LifeSupport {
   }
 }
 
+//Concrete Product -- Navigation
 class GpsNavigation implements Navigation {
   navigation(): void {
     console.log("GPS Navigation ON!!");
@@ -64,12 +68,14 @@ class QuantumNavigation implements Navigation {
   }
 }
 
+// Abstract Factory
 interface MissionFactory {
   createEngine(): Engine;
   createLifeSupport(): LifeSupport;
   createNavigation(): Navigation;
 }
 
+// Concrete Factory
 class MoonMission implements MissionFactory {
   createEngine() {
     return new ChemicalEngine();
