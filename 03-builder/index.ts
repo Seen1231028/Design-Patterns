@@ -136,7 +136,7 @@ class EarthBuilder implements Builder {
   }
 
   buildLife(): void {
-    this.planet.setLife("Earth life");
+    this.planet.setLife("life");
   }
 
   buildMetallicHydrogen(): void {}
