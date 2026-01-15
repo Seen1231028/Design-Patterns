@@ -125,7 +125,7 @@ const flightA = passengerPrototype.clone();
 flightA.setName("Boeing 141");
 flightA.display();
 
-const customPassenger = new PassengerAircraft("Fighter Jet F22", "None", 1020, 853);
+const customPassenger = new PassengerAircraft("Airbus A380", "None", 1020, 853);
 customPassenger.display();
 
 console.log("\n----- combat -----");
