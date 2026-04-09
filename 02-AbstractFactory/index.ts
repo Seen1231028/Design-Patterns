@@ -77,37 +77,37 @@ interface MissionFactory {
 
 // Concrete Factory
 class MoonMission implements MissionFactory {
-  createEngine() {
+  createEngine() : Engine{
     return new ChemicalEngine();
   }
-  createLifeSupport() {
+  createLifeSupport() : LifeSupport{
     return new BasicLifeSupport();
   }
-  createNavigation() {
+  createNavigation() : Navigation{
     return new GpsNavigation();
   }
 }
 
 class MarsMission implements MissionFactory {
-  createEngine() {
+  createEngine() : Engine {
     return new NuclearEngine();
   }
-  createLifeSupport() {
+  createLifeSupport() : LifeSupport {
     return new AdvancedLifeSupport();
   }
-  createNavigation() {
+  createNavigation()  : Navigation {
     return new AiNavigation();
   }
 }
 
 class DeepSpaceMission implements MissionFactory {
-  createEngine() {
+  createEngine() : Engine {
     return new IonEngine();
   }
-  createLifeSupport() {
+  createLifeSupport() : LifeSupport {
     return new SelfRepairLifeSupport();
   }
-  createNavigation() {
+  createNavigation() : Navigation {
     return new QuantumNavigation();
   }
 }
@@ -126,9 +126,40 @@ class Client {
   }
 }
 
-[new MoonMission(), new MarsMission(), new DeepSpaceMission()].forEach(
-  (mission) => {
-    new Client(mission).lauchMission();
-    console.log("----------------");
-  }
-);
+const moon = new MoonMission();
+const mars = new MarsMission();
+const deepspace = new DeepSpaceMission();
+
+
+console.log("------Moon Mission-----")
+let client = new Client(moon);
+client.lauchMission();
+console.log("------Mars Mission-----")
+client = new Client(mars);
+client.lauchMission();
+
+console.log("------DeepSpace Mission-----")
+client = new Client(deepspace);
+client.lauchMission();
+
+let factory : MissionFactory = new MoonMission();
+let engine = factory.createEngine();
+let lifesupport = factory.createLifeSupport();
+let nav = factory.createNavigation();
+
+console.log("------lauch Mission moon-----")
+engine.start();
+lifesupport.activate();
+nav.navigation();
+
+factory = new MarsMission()
+engine = factory.createEngine();
+// lifesupport = factory.createLifeSupport();
+nav = factory.createNavigation();
+
+
+console.log("------lauch Mission mars-----")
+engine.start();
+//lifesupport.activate();
+nav.navigation();
+
