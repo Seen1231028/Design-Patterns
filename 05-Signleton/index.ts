@@ -1,11 +1,11 @@
 class Sun {
   private static instance: Sun;
 
-  private temperature: string;
+  private temperature: number;
   private energyLevel: number;
 
   private constructor() {
-    this.temperature = "5000 °c";
+    this.temperature = 5000;
     this.energyLevel = 100;
     console.log("Sun is born");
   }
@@ -24,6 +24,17 @@ class Sun {
   getTemperature() {
     return this.temperature;
   }
+
+  provideTemperature() {
+    console.log("Sun provides heat to Earth (+)");
+    this.temperature += 100;
+  }
+
+  releaseTemperature() {
+    console.log("Sun release heat to Earth (-)");
+    this.temperature -= 100;
+  }
+
 
   provideEnergy() {
     console.log("Sun provides energy to Earth (+)");
@@ -59,3 +70,21 @@ console.log("----sun-release-energy----");
 sun.releaseEnergy();
 
 console.log("Sun Energy : ", sun.getEnergyLevel(), "%");
+
+console.log("----sun-provide-temp----");
+sun.provideTemperature();
+
+console.log("Sun Temp : ", sun.getTemperature());
+
+console.log("----sun-release-temp----");
+sun.releaseTemperature();
+
+console.log("Sun Temp : ", sun.getTemperature());
+
+const sun1 = Sun.getInstance();
+console.log(sun1.getEnergyLevel());
+console.log(sun1.getTemperature());
+sun1.provideTemperature()
+
+console.log(sun.getTemperature());
+console.log(sun1.getTemperature());

@@ -1,229 +1,239 @@
-class Planet {
-  private core: string;
-  private mantle: string;
-  private asthenosphere: string;
-  private lithosphere: string;
-  private clouds: string;
-  private life: string;
-  private continentalCrust: boolean = false;
-  private oceanicCrust: boolean = false;
-  private metallicHydrogen: boolean = false;
-  private liquidHydrogen: boolean = false;
-  private gaseousHydrogen: boolean = false;
+class DesktopConfig {
+  protected os: string = "";
+  protected windowManager: string = "";
+  protected statusBar: string = "";
+  protected notificationDaemon: string = "";
+  protected browser: string = "";
+  protected terminal: string = "";
 
-  constructor(){
-    this.core = "";
-    this.mantle = "";
-    this.asthenosphere = "";
-    this.lithosphere = "";
-    this.clouds = "";
-    this.life = "";
+  public setOS(os: string): void {
+    this.os = os;
   }
 
-  setCore(core: string) {
-    return this.core = core;
+  public setWindowManager(wm: string): void {
+    this.windowManager = wm;
   }
 
-  setMantle(mantle: string) {
-    return this.mantle = mantle;
+  public setStatusBar(statusBar: string): void {
+    this.statusBar = statusBar;
   }
 
-  setAsthenosphere(asthenosphere: string) {
-    return this.asthenosphere = asthenosphere;
+  public setNotificationDaemon(notificationDaemon: string): void {
+    this.notificationDaemon = notificationDaemon;
   }
 
-  setLithosphere(lithosphere: string) {
-    return this.lithosphere = lithosphere;
+  public setBrowser(browser: string): void {
+    this.browser = browser;
   }
 
-  setClouds(clouds: string) {
-    return this.clouds = clouds;
+  public setTerminal(terminal: string): void {
+    this.terminal = terminal;
   }
 
-  setLife(life: string) {
-    return this.life = life;
+  public getOS(): string {
+    return this.os;
   }
 
-  setContinentalCrust(value: boolean) {
-    return this.continentalCrust = value;
+  public getWindowManager(): string {
+    return this.windowManager;
   }
 
-  setOceanicCrust(value: boolean) {
-    return this.oceanicCrust = value;
+  public getStatusBar(): string {
+    return this.statusBar;
   }
 
-  setMetallicHydrogen(value: boolean) {
-    return this.metallicHydrogen = value;
+  public getNotificationDaemon(): string {
+    return this.notificationDaemon;
   }
 
-  setLiquidHydrogen(value: boolean) {
-    return this.liquidHydrogen = value;
+  public getBrowser(): string {
+    return this.browser;
   }
 
-  setGaseousHydrogen(value: boolean) {
-    return this.gaseousHydrogen = value;
+  public getTerminal(): string {
+    return this.terminal;
   }
 
-  show(): void {
-    console.log("----- Planet Info -----");
 
-    if (this.core) console.log("Core:", this.core);
-    if (this.mantle) console.log("Mantle:", this.mantle);
-    if (this.asthenosphere) console.log("Asthenosphere:", this.asthenosphere);
-    if (this.lithosphere) console.log("Lithosphere:", this.lithosphere);
-    if (this.clouds) console.log("Clouds:", this.clouds);
-    if (this.life) console.log("Life:", this.life);
-
-    console.log("Continental Crust:", this.continentalCrust);
-    console.log("Oceanic Crust:", this.oceanicCrust);
-
-    if (this.metallicHydrogen) console.log("Metallic Hydrogen: YES");
-    if (this.liquidHydrogen) console.log("Liquid Hydrogen: YES");
-    if (this.gaseousHydrogen) console.log("Gaseous Hydrogen: YES");
-
-    console.log("---------------------------\n");
+  public showConfig(): void {
+    console.log("=== Desktop Environment Setup ===");
+    if (this.os) console.log(`OS: ${this.os}`);
+    if (this.windowManager)
+      console.log(`Window Manager: ${this.getWindowManager()}`);
+    if (this.getStatusBar()) console.log(`Status Bar: ${this.getStatusBar()}`);
+    if (this.getNotificationDaemon())
+      console.log(`Notifications: ${this.getNotificationDaemon()}`);
+    if (this.browser) console.log(`Browser: ${this.getBrowser()}`);
+    if (this.terminal) console.log(`Terminal: ${this.getTerminal()}`);
+    console.log("=================================\n");
   }
 }
 
-interface Builder {
+interface IDesktopBuilder {
   reset(): void;
-  buildCore(): void;
-  buildMantle(): void;
-  buildAsthenosphere(): void;
-  buildLithosphere(): void;
-  buildContinentalCrust(): void;
-  buildOceanicCrust(): void;
-  buildLife(): void;
-  buildMetallicHydrogen(): void;
-  buildLiquidHydrogen(): void;
-  buildGaseousHydrogen(): void;
-  buildClouds(): void;
+  buildOS(name: string): void;
+  buildWindowManager(): void;
+  buildStatusBar(): void;
+  buildNotificationDaemon(): void;
+  buildBrowser(): void;
+  buildTerminal(): void;
+  getResult(): DesktopConfig;
 }
 
-class EarthBuilder implements Builder {
-  private planet!: Planet;
+class TilingWMBuilder implements IDesktopBuilder {
+  private config!: DesktopConfig;
 
   constructor() {
     this.reset();
   }
 
   reset(): void {
-    this.planet = new Planet();
+    this.config = new DesktopConfig();
   }
 
-  buildCore(): void {
-    this.planet.setCore("Earth Core");
+  buildOS(name: string = "Arch linux"): void {
+    this.config.setOS(name);
+  }
+  buildWindowManager(): void {
+    this.config.setWindowManager("i3wm");
+  }
+  buildStatusBar(): void {
+    this.config.setStatusBar("polybar");
+  }
+  buildNotificationDaemon(): void {
+    this.config.setNotificationDaemon("dunst");
+  }
+  buildBrowser(): void {
+    this.config.setBrowser("Brave");
+  }
+  buildTerminal(): void {
+    this.config.setTerminal("Alacritty");
   }
 
-  buildMantle(): void {
-    this.planet.setMantle("Earth Mantle");
-  }
-
-  buildAsthenosphere(): void {
-    this.planet.setAsthenosphere("Earth Asthenosphere");
-  }
-
-  buildLithosphere(): void {
-    this.planet.setLithosphere("Earth Lithosphere");
-  }
-
-  buildContinentalCrust(): void {
-    this.planet.setContinentalCrust(true);
-  }
-
-  buildOceanicCrust(): void {
-    this.planet.setOceanicCrust(true);
-  }
-
-  buildLife(): void {
-    this.planet.setLife("life");
-  }
-
-  buildMetallicHydrogen(): void {}
-  buildLiquidHydrogen(): void {}
-  buildGaseousHydrogen(): void {}
-
-  buildClouds(): void {
-    this.planet.setClouds("Earth clouds");
-  }
-
-  getResult(): Planet {
-    return this.planet;
+  getResult(): DesktopConfig {
+    return this.config;
   }
 }
 
-class JupiterBuilder implements Builder {
-  private planet!: Planet;
+class FloatingWMBuilder implements IDesktopBuilder {
+  private config!: DesktopConfig;
 
   constructor() {
     this.reset();
   }
 
   reset(): void {
-    this.planet = new Planet();
+    this.config = new DesktopConfig();
   }
 
-  buildCore(): void {
-    this.planet.setCore("Dense rocky core");
+  buildOS(name: string = "Ubuntu"): void {
+    this.config.setOS(name);
   }
-
-  buildMantle(): void {}
-  buildAsthenosphere(): void {}
-  buildLithosphere(): void {}
-  buildContinentalCrust(): void {}
-  buildOceanicCrust(): void {}
-  buildLife(): void {}
-
-  buildMetallicHydrogen(): void {
-    this.planet.setMetallicHydrogen(true);
+  buildWindowManager(): void {
+    this.config.setWindowManager("XFCE");
   }
-
-  buildLiquidHydrogen(): void {
-    this.planet.setLiquidHydrogen(true);
+  buildStatusBar(): void {
+    this.config.setStatusBar("xfce4-panel");
   }
-
-  buildGaseousHydrogen(): void {
-    this.planet.setGaseousHydrogen(true);
+  buildNotificationDaemon(): void {
+    this.config.setNotificationDaemon("notify-osd");
   }
-
-  buildClouds(): void {
-    this.planet.setClouds("Ammonia clouds & Great Red Spot");
+  buildBrowser(): void {
+    this.config.setBrowser("Firefox");
   }
+  buildTerminal(): void {
+    this.config.setTerminal("GNOME Terminal");
+  } 
 
-  getResult(): Planet {
-    return this.planet;
+  getResult(): DesktopConfig {
+    return this.config;
   }
 }
 
-class Director {
+class DesktopDirector {
+  private builder: IDesktopBuilder;
 
-  makeEarth(builder: Builder) {
-    builder.reset();
-    builder.buildCore();
-    builder.buildMantle();
-    builder.buildAsthenosphere();
-    builder.buildLithosphere();
-    builder.buildContinentalCrust();
-    builder.buildOceanicCrust();
-    builder.buildLife();
-    builder.buildClouds();
+  constructor(builder: IDesktopBuilder) {
+    this.builder = builder;
   }
 
-  makeJupiter(builder: Builder) {
-    builder.reset();
-    builder.buildCore();
-    builder.buildMetallicHydrogen();
-    builder.buildLiquidHydrogen();
-    builder.buildGaseousHydrogen();
-    builder.buildClouds();
+  changeBuilder(builder: IDesktopBuilder): void {
+    this.builder = builder;
+  }
+
+  buildDailyDriverSetup(name: string): void {
+    this.builder.reset();
+    this.builder.buildOS(name);
+    this.builder.buildWindowManager();
+    this.builder.buildStatusBar();
+    this.builder.buildNotificationDaemon();
+    this.builder.buildBrowser();
+    this.builder.buildTerminal();
+  }
+
+  buildMinimalSetup(name: string): void {
+    this.builder.reset();
+    this.builder.buildOS(name);
+    this.builder.buildWindowManager();
+    this.builder.buildTerminal();
+  }
+
+  buildMinimumSetup(name: string): void {
+    this.builder.reset();
+    this.builder.buildOS(name);
+    this.builder.buildWindowManager();
+    this.builder.buildTerminal();
+    this.builder.buildBrowser();
   }
 }
 
-const earth = new EarthBuilder();
-let device = new Director();
-device.makeEarth(earth);
-earth.getResult().show();
+const tilingBuilder = new TilingWMBuilder();
+const director = new DesktopDirector(tilingBuilder);
 
-const jupiter = new JupiterBuilder();
-device.makeJupiter(jupiter);
-jupiter.getResult().show();
+console.log("--- Building Tiling WM Daily Driver ---");
+director.buildDailyDriverSetup("Arch Linux");
+tilingBuilder.getResult().showConfig();
+
+console.log("--- Building Tiling WM Minimal Setup ---");
+director.buildMinimalSetup("Arch Linux");
+tilingBuilder.getResult().showConfig();
+
+const floatingBuilder = new FloatingWMBuilder();
+director.changeBuilder(floatingBuilder);
+
+console.log("--- Building Floating WM Daily Driver ---");
+director.buildDailyDriverSetup("Ubuntu");
+floatingBuilder.getResult().showConfig();
+
+console.log("--- Building Floating WM Minimal Setup ---");
+director.buildMinimalSetup("Ubuntu");
+floatingBuilder.getResult().showConfig();
+
+console.log("--- Building Custom Desktop Setup ---");
+const customBuilder = new TilingWMBuilder();
+customBuilder.reset();
+customBuilder.buildOS("Fedora");
+customBuilder.buildWindowManager();
+customBuilder.buildStatusBar();
+customBuilder.buildNotificationDaemon();
+customBuilder.buildBrowser();
+customBuilder.buildTerminal();
+const desktopConfig: DesktopConfig = customBuilder.getResult();
+desktopConfig.showConfig();
+
+const arr: FloatingWMBuilder[] = [];
+for (let i = 0; i < 5; i++) {
+  const builder = new FloatingWMBuilder();
+  builder.buildOS(`Custom OS ${i + 1}`);
+  builder.buildWindowManager();
+  builder.buildStatusBar();
+  builder.buildNotificationDaemon();
+  builder.buildBrowser();
+  builder.buildTerminal();
+  arr.push(builder);
+}
+
+for (const builder of arr) {
+  const desktopConfig1: DesktopConfig = builder.getResult();
+  desktopConfig1.showConfig();
+}

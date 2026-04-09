@@ -127,8 +127,14 @@ abstract class DeviceFactory {
     device.initialize();
     device.execute();
     device.sendData();
+    console.log("--------------")
+  }
+
+  shutDown() : void {
+    const device = this.createDevice();
     device.shutdown();
   }
+
 }
 
 class MakeSmartlight extends DeviceFactory {
@@ -169,4 +175,5 @@ class MakeDrones extends DeviceFactory {
   new MakeDrones()
 ].forEach((Client) => {
   Client.onDevice();
+  Client.shutDown();
 });
