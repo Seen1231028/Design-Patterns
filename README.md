@@ -26,15 +26,16 @@ npx ts-node <pattern-folder>/index.ts
 Here are the design patterns implemented in this repository, categorized by their structural types:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#6366f1', 'primaryTextColor': '#fff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#94a3b8', 'secondaryColor': '#10b981', 'tertiaryColor': '#f59e0b', 'fontFamily': 'Segoe UI, sans-serif'}}}%%
 mindmap
-  root((Design Patterns))
-    Creational
+  root((🎨 Design Patterns))
+    🏭 Creational
       Factory Method
       Abstract Factory
       Builder
       Prototype
       Singleton
-    Structural
+    🏗️ Structural
       Adapter
       Bridge
       Composite
@@ -42,7 +43,7 @@ mindmap
       Facade
       Flyweight
       Proxy
-    Behavioral
+    ⚙️ Behavioral
       Chain of Responsibility
       Command
       Iterator
